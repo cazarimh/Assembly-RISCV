@@ -1,0 +1,36 @@
+    What are the values ​​of the following registers in hexadecimal representation when the execution reaches the "end" label?
+        a0: 0x0
+        a1: 0xb
+        a2: 0x1
+        a3: 0x11
+
+    What are the values ​​of the following registers in hexadecimal representation when the execution reaches the “loop” label for the fifth time?
+        a0: 0x3bc1
+        a1: 0x3
+        a2: 0x1
+        a3: 0x3
+
+    What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 25 instructions?
+        a0: 0x7783
+        a1: 0x3
+        a2: 0x0
+        a3: 0x2
+
+    What are the values ​​of the following registers in hexadecimal representation when the execution reaches the “loop” label for the eighth time?
+        a0: 0x778
+        a1: 0x4
+        a2: 0x0
+        a3: 0x6
+
+    What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 30 instructions?
+        a0: 0x3bc1
+        a1: 0x3
+        a2: 0x1
+        a3: 0x3
+
+    What are the values ​​of the following registers in hexadecimal representation when the contents of a1 and a2 are different from 0 and have the same value for the first time?
+        a0: 0x3bc1b
+        a3: 0xffffffff
+
+    What value (in hexadecimal representation) is stored at the "result" memory location after the execution of instruction sw a1, 0(a0) (located after the "end" label)?
+	0xb
