@@ -56,9 +56,13 @@ ret
 # param: a0 - endereço da string; a1 - número inteiro
 # return: a0 - endereço do início; a1 - quantidade de caracteres
 int_to_string:
-    addi a0, a0, 6 # Vai até o último char do número atual
+    addi a0, a0, 5 # Vai até o último char do número atual
     li s1, 48 # Valor do char '0'
     li s2, 10
+
+    bnez a1, 2f
+        sb s1, 0(a0)
+    2:
 
     li t0, 2
     1:
@@ -125,15 +129,15 @@ main:
 
     lb t0, 0(a0)
     li t1, '-'
-    li t2, 0
+    li a7, 0
     bne t0, t1, 2f
-        li t2, 1
+        li a7, 1
         addi a0, a0, 1
     2:
 
     jal string_to_int
     
-    beqz t2, 2f
+    beqz a7, 2f
         li t0, -1
         mul a0, a0, t0
     2:
@@ -146,16 +150,25 @@ main:
     
     la a0, result
 
+    li t0, 0
+    li t1, '\n'
+
+    sb t0, 7(a0)
+    sb t1, 6(a0)
+
     bgez a1, 1f
-        li t0, '-'
-        sb t0, 0(a0)
-        addi a1, a1, 1
+        li t0, 49
+        li t1, '-'
 
-        li t0, -1
-        mul a1, a1, t0
+        sb t0, 5(a0)
+        sb t1, 4(a0)
+
+        addi a0, a0, 4
+        li a1, 4
+        j 2f
     1:
-
-    jal int_to_string
+        jal int_to_string
+    2:
 
     mv a2, a1
     mv a1, a0
