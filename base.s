@@ -1,4 +1,5 @@
 .data
+    return: .word 0
     buffer: .space 5
 
 .text

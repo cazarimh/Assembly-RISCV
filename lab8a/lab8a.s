@@ -125,15 +125,15 @@ main:
        rem a0, t0, s1 # x = a0 <-- indice % width
        div a1, t0, s1 # y = a1 <-- indice / width
 
-       lb t2, 0(s0) # t2 <-- buffer[n] (0-255)
+       lbu t2, 0(s0) # t2 <-- buffer[n] (0-255)
 
-       sll a2, t2, 8 # a2 <-- Red
+       slli a2, t2, 8 # a2 <-- Red
 
        or a2, a2, t2 # a2 <-- Red + Green
-       sll a2, a2, 8
+       slli a2, a2, 8
 
        or a2, a2, t2 # a2 <-- Red + Green + Blue
-       sll a2, a2, 8
+       slli a2, a2, 8
 
        li t2, 255
        or a2, a2, t2 # a2 <-- Red + Green + Blue + Alpha
