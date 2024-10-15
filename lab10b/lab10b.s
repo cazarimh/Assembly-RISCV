@@ -140,12 +140,17 @@ ret
 # param: a0 - (Node *) root_node; a1 - (int) val
 # return: a0 - (int) depth
 recursive_tree_search:
+	addi sp, sp, -16
+	sw s0, 12(sp)
+	sw ra, 8(sp)
+	sw a0, 4(sp)
+
     li s0, 0                # indice do andar atual
 
     recursive:
         addi s0, s0, 1
 
-        addi sp, sp, -8
+        addi sp, sp, -16
 
         sw ra, 4(sp)
         sw a0, 0(sp)
@@ -155,6 +160,8 @@ recursive_tree_search:
         lw a4, 8(a0)
 
         beq a1, a2, there_is
+
+			left_node:
 
             beqz a3, right_node
                 mv a0, a3
@@ -169,24 +176,26 @@ recursive_tree_search:
             finish:
 
             lw ra, 4(sp)
-            lw a0, 8(sp)            # endereço do nó pai
+            lw a0, 16(sp)           # endereço do nó pai
+
             lw a3, 4(a0)            # endereço do nó da esquerda do pai
             lw a4, 8(a0)            # endereço do nó da direita do pai
-            addi sp, sp, 8
+
+            addi sp, sp, 16
             addi s0, s0, -1         # volta na profundidade
             ret
 
         there_is:
     
-    addi t0, s0, -1
-    li t1, 8
-    mul t0, t0, t1
-
-    add sp, sp, t0                  # desaloca o espaço dos nós além da raiz
-    lw ra, 4(sp)                    # puxa da memória o ra original
-    addi sp, sp, 8                  # desaloca o espaço inicial do nó
+    li t0, 16
+    mul t0, s0, t0
+    add sp, sp, t0                  # desaloca o espaço dos nós
 
     mv a0, s0                       # passa a profundidade encontrada para a0
+
+    lw s0, 12(sp)                   # devolve o valor original de s0
+    lw ra, 8(sp)                    # puxa da memória o ra original
+    addi sp, sp, 16                 # desaloca o espaço inicial do nó
 ret
 
 exit:
