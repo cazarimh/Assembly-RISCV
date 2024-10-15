@@ -108,16 +108,26 @@ ret
 #
 # param: a0 - (const char*) str
 # return: a0 - (int) value
-atoi:
-	lb a1, 0(a0)
-	li t0, '-'
-	bne a1, t0, 1f          # se o primeiro char for '-' salva o multiplicador -1 para invertê-lo
-		li a1, -1
-		addi a0, a0, 1
-		j 2f
+atoi:	
+	li t0, ' '				# carrega o char espaço para pular se houver na string
 	1:
-		li a1, 1
+		lb a1, 0(a0)
+		bne a1, t0, 2f
+		addi a0, a0, 1
+		j 1b
 	2:
+
+	lb a1, 0(a0)
+	li a2, 1
+
+	li t0, '-'
+	bgt a1, t0, 1f          # se o primeiro char for '+' ou '-' salva o multiplicador 1 ou -1
+		bne a1, t0, 2f
+			li a2, -1
+		2:
+		addi a0, a0, 1
+	1:
+	mv a1, a2
 	
 	li a2, 0
 	1:
@@ -133,9 +143,11 @@ atoi:
 	mul a0, a2, a1
 ret
 
-# atoi
+# linked_list_search
 #
-# Recebe uma em string e a transfora em inteiro
+# Recebe uma lista ligada e um valor, retorna:
+#	-1, se valor não estiver na lista
+#	index, se valor estiver na lista 
 #
 # param: a0 - (Node *) head_node; a1 - (int) val
 # return: a0 - (int) index
