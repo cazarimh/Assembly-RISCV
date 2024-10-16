@@ -193,7 +193,10 @@ recursive_tree_search:
 
             addi sp, sp, 16
             addi s0, s0, -1         # volta na profundidade
+			beqz s0, there_isnt
             ret
+
+			there_isnt:
 
         there_is:
     
